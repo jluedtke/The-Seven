@@ -1,4 +1,4 @@
-# Seven
+# The Seven
 ### Jared Luedtke 07.05.17
 
 ## Description
