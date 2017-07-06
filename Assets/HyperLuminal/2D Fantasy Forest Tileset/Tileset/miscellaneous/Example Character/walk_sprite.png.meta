@@ -1,12 +1,29 @@
 fileFormatVersion: 2
 guid: b228b062502ac9944b0869212143aa9e
 TextureImporter:
-  serializedVersion: 2
+  fileIDToRecycleName:
+    21300000: walk_sprite_0
+    21300002: walk_sprite_1
+    21300004: walk_sprite_2
+    21300006: walk_sprite_3
+    21300008: walk_sprite_4
+    21300010: walk_sprite_5
+    21300012: walk_sprite_6
+    21300014: walk_sprite_7
+    21300016: walk_sprite_8
+    21300018: walk_sprite_9
+    21300020: walk_sprite_10
+    21300022: walk_sprite_11
+    21300024: walk_sprite_12
+    21300026: walk_sprite_13
+    21300028: walk_sprite_14
+    21300030: walk_sprite_15
+  serializedVersion: 4
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
+    sRGBTexture: 1
     linearTexture: 0
-    correctGamma: 0
     fadeOut: 0
     borderMipMap: 0
     mipMapFadeDistanceStart: 1
@@ -14,11 +31,12 @@ TextureImporter:
   bumpmap:
     convertToNormalMap: 0
     externalNormalMap: 0
-    heightScale: .25
+    heightScale: 0.25
     normalMapFilter: 0
   isReadable: 0
   grayScaleToAlpha: 0
-  generateCubemap: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
   seamlessCubemap: 0
   textureFormat: -1
   maxTextureSize: 1024
@@ -34,15 +52,31 @@ TextureImporter:
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
-  spritePivot: {x: .5, y: .5}
+  spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
+  alphaUsage: 1
   alphaIsTransparency: 1
+  spriteTessellationDetail: -1
   textureType: 8
-  buildTargetSettings: []
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 1024
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
   spriteSheet:
+    serializedVersion: 2
     sprites:
-    - name: walk_sprite_0
+    - serializedVersion: 2
+      name: walk_sprite_0
       rect:
         serializedVersion: 2
         x: 0
@@ -52,7 +86,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: walk_sprite_1
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: walk_sprite_1
       rect:
         serializedVersion: 2
         x: 128
@@ -62,7 +99,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: walk_sprite_2
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: walk_sprite_2
       rect:
         serializedVersion: 2
         x: 256
@@ -72,7 +112,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: walk_sprite_3
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: walk_sprite_3
       rect:
         serializedVersion: 2
         x: 384
@@ -82,7 +125,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: walk_sprite_4
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: walk_sprite_4
       rect:
         serializedVersion: 2
         x: 0
@@ -92,7 +138,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: walk_sprite_5
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: walk_sprite_5
       rect:
         serializedVersion: 2
         x: 128
@@ -102,7 +151,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: walk_sprite_6
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: walk_sprite_6
       rect:
         serializedVersion: 2
         x: 256
@@ -112,7 +164,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: walk_sprite_7
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: walk_sprite_7
       rect:
         serializedVersion: 2
         x: 384
@@ -122,7 +177,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: walk_sprite_8
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: walk_sprite_8
       rect:
         serializedVersion: 2
         x: 0
@@ -132,7 +190,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: walk_sprite_9
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: walk_sprite_9
       rect:
         serializedVersion: 2
         x: 128
@@ -142,7 +203,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: walk_sprite_10
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: walk_sprite_10
       rect:
         serializedVersion: 2
         x: 256
@@ -152,7 +216,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: walk_sprite_11
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: walk_sprite_11
       rect:
         serializedVersion: 2
         x: 384
@@ -162,7 +229,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: walk_sprite_12
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: walk_sprite_12
       rect:
         serializedVersion: 2
         x: 0
@@ -172,7 +242,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: walk_sprite_13
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: walk_sprite_13
       rect:
         serializedVersion: 2
         x: 128
@@ -182,7 +255,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: walk_sprite_14
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: walk_sprite_14
       rect:
         serializedVersion: 2
         x: 256
@@ -192,7 +268,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: walk_sprite_15
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: walk_sprite_15
       rect:
         serializedVersion: 2
         x: 384
@@ -202,5 +281,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    outline: []
   spritePackingTag: 
   userData: 
+  assetBundleName: 
+  assetBundleVariant: 
