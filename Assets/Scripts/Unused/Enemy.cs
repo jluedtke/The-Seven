@@ -15,17 +15,20 @@ public class Enemy : MonoBehaviour {
     public LayerMask blockingLayer;
     public float moveTime = 1;
 
+    private GameObject gameManager;
 
     // Use this for initialization
     void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player").transform;
-        InvokeRepeating("AttemptMove", 0f, .1f); // change or find a better way
+        gameManager = GameObject.Find("GameManager");
+
+        InvokeRepeating("AttemptMove", 0f, .1f); // call 10 per/sec
     }
 
     private void AttemptMove()
     {
-        if (GameManager.instance.playerTurn == true)
+        if (gameManager.GetComponent<GameManager>().playerTurn == true)
         {
             return;
         }

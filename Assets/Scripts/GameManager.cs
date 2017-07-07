@@ -4,7 +4,6 @@ using UnityEngine;
 
 
 [System.Serializable]
-
 public class GameManager : MonoBehaviour {
 
     public static GameManager instance = null;
@@ -13,16 +12,7 @@ public class GameManager : MonoBehaviour {
 
     void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else if (instance != this)
-        {
-            Destroy(gameObject);
-        }
-        DontDestroyOnLoad(gameObject);
-        
+        instance = this;
     }
 
     public Vector2 mapSize;
