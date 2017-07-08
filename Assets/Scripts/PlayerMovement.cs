@@ -4,23 +4,27 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 3f;
-    private float gridSize = 1f;
+    private float gridSize = 2f;
     private enum Orientation
     {
         Horizontal,
         Vertical
     };
     private Orientation gridOrientation = Orientation.Horizontal;
-    public bool allowDiagonals = true;
+    private bool allowDiagonals = false;
     private bool correctDiagonalSpeed = true;
     public Vector2 input;
-    public bool isMoving = false;
+    private bool isMoving = false;
     private Vector3 startPosition;
     private Vector3 endPosition;
     private float t;
     private float factor;
 
     private GameObject gameManager;
+
+    private float counter = 0f;
+    private float moveRange = 5f; //Speed
+    private bool coroutineDone = true;
 
     void Start()
     {
@@ -49,17 +53,18 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
 
-            if (input != Vector2.zero)
+            if (input != Vector2.zero && coroutineDone)
             {
+                coroutineDone = false;
                 StartCoroutine(Move(transform));
             }
         }
     }
 
+
     public virtual IEnumerator Move(Transform transform)
     {
         isMoving = true;
-
         startPosition = transform.position;
         t = 0;
 
@@ -75,29 +80,16 @@ public class PlayerMovement : MonoBehaviour
         }
 
 
-
-
-
-        Vector2 raycastVector = new Vector2(endPosition.x + Input.GetAxisRaw("Horizontal"), endPosition.y + Input.GetAxisRaw("Vertical"));
-        Vector2 startRaycastVector = new Vector2(startPosition.x, startPosition.y);
-
-
-        RaycastHit2D hit = Physics2D.Linecast(startRaycastVector, raycastVector);
-        Debug.DrawLine(startRaycastVector, raycastVector, Color.red);
+        RaycastHit2D hit = Physics2D.Linecast(startPosition, endPosition, 1<<10); //Enemy Layer
         if (hit.collider != null)
         {
-            Debug.Log(hit.collider.name);
-            if (hit.collider.name != "Player")
+            if (hit.collider) //Should equal enemy or something
             {
-                Debug.Log("Hit");
-                factor = 0;
-                endPosition = startPosition;
-                yield return 0;
-
+                isMoving = false;
+                coroutineDone = true;
+                StopAllCoroutines();
             }
-
         }
-
 
 
         if (allowDiagonals && correctDiagonalSpeed && input.x != 0 && input.y != 0)
@@ -109,6 +101,12 @@ public class PlayerMovement : MonoBehaviour
             factor = 1f;
         }
 
+        if (counter == moveRange)
+        {
+            isMoving = false;
+            StopAllCoroutines();
+        }
+
         while (t < 1f)
         {
             t += Time.deltaTime * (moveSpeed / gridSize) * factor;
@@ -116,8 +114,22 @@ public class PlayerMovement : MonoBehaviour
             yield return null;
         }
 
+        counter++; //Should be on game manager
+        //should allow for multiple moves per turn. 
+        //Need to put on parent class and call from there
+
+        if (counter == moveRange)
+        {
+            counter = 0;
+            isMoving = false;
+            yield return new WaitForSeconds(2f); //Throw this on the turn caller
+            gameManager.GetComponent<GameManager>().playerTurn = false; //turn to true when testing Player Movement
+            coroutineDone = true;
+            StopAllCoroutines();
+        }
+
         isMoving = false;
-        gameManager.GetComponent<GameManager>().playerTurn = true; //turn back to false
+        coroutineDone = true;
         yield return 0;
     }
 }

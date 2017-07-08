@@ -4,14 +4,14 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
     public float moveSpeed = 3f;
-    private float gridSize = 1f;
+    private float gridSize = 2f;
     private enum Orientation
     {
         Horizontal,
         Vertical
     };
     private Orientation gridOrientation = Orientation.Horizontal;
-    public bool allowDiagonals = true;
+    public bool allowDiagonals = false;
     private bool correctDiagonalSpeed = true;
     public Vector2 input;
     public bool isMoving = false;
@@ -22,6 +22,10 @@ public class EnemyMovement : MonoBehaviour
 
     private GameObject gameManager;
     private Transform target;
+
+    private float counter = 0f;
+    private float moveRange = 5f; //Speed
+    private bool coroutineDone = true;
 
     // Use this for initialization
     void Start()
@@ -38,7 +42,6 @@ public class EnemyMovement : MonoBehaviour
         {
             return;
         }
-
 
         int xDir = 0;
         int yDir = 0;
@@ -68,8 +71,9 @@ public class EnemyMovement : MonoBehaviour
                 }
             }
 
-            if (input != Vector2.zero)
+            if (input != Vector2.zero && coroutineDone)
             {
+                coroutineDone = false;
                 StartCoroutine(Move(transform));
             }
         }
@@ -78,7 +82,6 @@ public class EnemyMovement : MonoBehaviour
     public virtual IEnumerator Move(Transform transform)
     {
         isMoving = true;
-
         startPosition = transform.position;
         t = 0;
 
@@ -91,6 +94,23 @@ public class EnemyMovement : MonoBehaviour
         {
             endPosition = new Vector3(startPosition.x + System.Math.Sign(input.x) * gridSize,
                 startPosition.y + System.Math.Sign(input.y) * gridSize, startPosition.z);
+        }
+
+        RaycastHit2D hit = Physics2D.Linecast(startPosition, endPosition, 1<<9); //FUCKING LAYERS DUDE!
+        if (hit.collider != null)
+        {
+            Debug.Log(hit.collider.name);
+
+            if (hit.collider.name == "Player")
+            {
+                //tell to attack or something if melee
+                Debug.Log(hit.collider.name);
+                isMoving = false;
+                coroutineDone = true;
+                gameManager.GetComponent<GameManager>().playerTurn = true; // take out later, just use for melee only scripts.
+
+                StopAllCoroutines();
+            }
         }
 
         if (allowDiagonals && correctDiagonalSpeed && input.x != 0 && input.y != 0)
@@ -109,8 +129,21 @@ public class EnemyMovement : MonoBehaviour
             yield return null;
         }
 
+        counter++; 
+
+        if (counter == moveRange)
+        {
+            counter = 0;
+            isMoving = false;
+            // Do I need this?
+            // yield return new WaitForSeconds(2f); 
+            gameManager.GetComponent<GameManager>().playerTurn = true;
+            coroutineDone = true;
+            StopAllCoroutines();
+        }
+
         isMoving = false;
-        gameManager.GetComponent<GameManager>().playerTurn = true;
+        coroutineDone = true;
         yield return 0;
     }
 }
