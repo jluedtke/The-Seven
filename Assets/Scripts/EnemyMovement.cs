@@ -78,7 +78,6 @@ public class EnemyMovement : MonoBehaviour
     public virtual IEnumerator Move(Transform transform)
     {
         isMoving = true;
-        gameManager.GetComponent<GameManager>().playerTurn = true;
 
         startPosition = transform.position;
         t = 0;
@@ -111,6 +110,7 @@ public class EnemyMovement : MonoBehaviour
         }
 
         isMoving = false;
+        gameManager.GetComponent<GameManager>().playerTurn = true;
         yield return 0;
     }
 }

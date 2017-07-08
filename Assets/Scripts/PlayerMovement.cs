@@ -59,8 +59,6 @@ public class PlayerMovement : MonoBehaviour
     public virtual IEnumerator Move(Transform transform)
     {
         isMoving = true;
-        gameManager.GetComponent<GameManager>().playerTurn = false;
-
 
         startPosition = transform.position;
         t = 0;
@@ -75,6 +73,32 @@ public class PlayerMovement : MonoBehaviour
             endPosition = new Vector3(startPosition.x + System.Math.Sign(input.x) * gridSize,
                 startPosition.y + System.Math.Sign(input.y) * gridSize, startPosition.z);
         }
+
+
+
+
+
+        Vector2 raycastVector = new Vector2(endPosition.x + Input.GetAxisRaw("Horizontal"), endPosition.y + Input.GetAxisRaw("Vertical"));
+        Vector2 startRaycastVector = new Vector2(startPosition.x, startPosition.y);
+
+
+        RaycastHit2D hit = Physics2D.Linecast(startRaycastVector, raycastVector);
+        Debug.DrawLine(startRaycastVector, raycastVector, Color.red);
+        if (hit.collider != null)
+        {
+            Debug.Log(hit.collider.name);
+            if (hit.collider.name != "Player")
+            {
+                Debug.Log("Hit");
+                factor = 0;
+                endPosition = startPosition;
+                yield return 0;
+
+            }
+
+        }
+
+
 
         if (allowDiagonals && correctDiagonalSpeed && input.x != 0 && input.y != 0)
         {
@@ -93,6 +117,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         isMoving = false;
+        gameManager.GetComponent<GameManager>().playerTurn = true; //turn back to false
         yield return 0;
     }
 }
