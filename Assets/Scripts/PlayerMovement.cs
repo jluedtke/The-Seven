@@ -26,9 +26,12 @@ public class PlayerMovement : MonoBehaviour
     private float moveRange = 5f; //Speed
     private bool coroutineDone = true;
 
+    public SpriteChanger spriteChanger;
+
     void Start()
     {
         gameManager = GameObject.Find("GameManager");
+        spriteChanger = GetComponentInChildren<SpriteChanger>();
     }
 
     public void Update()
@@ -110,6 +113,7 @@ public class PlayerMovement : MonoBehaviour
 
         while (t < 1f)
         {
+            spriteChanger.ChangeSprite(input);
             t += Time.deltaTime * (moveSpeed / gridSize) * factor;
             transform.position = Vector3.Lerp(startPosition, endPosition, t);
             yield return null;

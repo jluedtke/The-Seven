@@ -16,24 +16,24 @@ public class SpriteChanger : MonoBehaviour {
         sr.sprite = backwardSprite;
     }
 
-    private void FixedUpdate()
+    public void ChangeSprite(Vector3 dir)
     {
-        if (Input.GetKey("w"))
+        if (dir.y > 0)
         {
             sr.sprite = forwardSprite;
             sr.flipX = false;
         }
-        if (Input.GetKey("s"))
+        if (dir.y < 0)
         {
             sr.sprite = backwardSprite;
             sr.flipX = false;
         }
-        if (Input.GetKey("d"))
+        if (dir.x > 0)
         {
             sr.sprite = sidewaysSprite;
             sr.flipX = false;
         }
-        if (Input.GetKey("a"))
+        if (dir.x < 0)
         {
             sr.sprite = sidewaysSprite;
             sr.flipX = true;
