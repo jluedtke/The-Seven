@@ -100,7 +100,6 @@ public class EnemyMovement : MonoBehaviour
         if (hit.collider != null)
         {
             Debug.Log(hit.collider.name);
-
             if (hit.collider.name == "Player")
             {
                 //tell to attack or something if melee
@@ -111,6 +110,8 @@ public class EnemyMovement : MonoBehaviour
 
                 StopAllCoroutines();
             }
+            yield return null;
+
         }
 
         if (allowDiagonals && correctDiagonalSpeed && input.x != 0 && input.y != 0)

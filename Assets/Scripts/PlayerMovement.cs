@@ -89,6 +89,7 @@ public class PlayerMovement : MonoBehaviour
                 coroutineDone = true;
                 StopAllCoroutines();
             }
+            yield return null;
         }
 
 

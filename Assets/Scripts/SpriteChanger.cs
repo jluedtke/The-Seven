@@ -21,10 +21,12 @@ public class SpriteChanger : MonoBehaviour {
         if (Input.GetKey("w"))
         {
             sr.sprite = forwardSprite;
+            sr.flipX = false;
         }
         if (Input.GetKey("s"))
         {
             sr.sprite = backwardSprite;
+            sr.flipX = false;
         }
         if (Input.GetKey("d"))
         {
