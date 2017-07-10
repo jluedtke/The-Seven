@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 3f;
-    private float gridSize = 2f;
+    private float gridSize = 1f;
     private enum Orientation
     {
         Horizontal,
@@ -27,6 +27,9 @@ public class PlayerMovement : MonoBehaviour
     private bool coroutineDone = true;
 
     public SpriteChanger spriteChanger;
+
+    private LayerMask finalMask = (1 << 10) | (1 << 11);
+
 
     void Start()
     {
@@ -83,10 +86,17 @@ public class PlayerMovement : MonoBehaviour
         }
 
 
-        RaycastHit2D hit = Physics2D.Linecast(startPosition, endPosition, 1<<10); //Enemy Layer
+        RaycastHit2D hit = Physics2D.Linecast(startPosition, endPosition, finalMask); //Enemy Layer && wall layer
         if (hit.collider != null)
         {
-            if (hit.collider) //Should equal enemy or something
+            if (hit.collider.tag == "Enemy") //Should equal enemy or something
+            {
+                isMoving = false;
+                coroutineDone = true;
+                StopAllCoroutines();
+            }
+
+            if (hit.collider.tag == "Wall")
             {
                 isMoving = false;
                 coroutineDone = true;

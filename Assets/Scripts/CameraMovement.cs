@@ -5,16 +5,21 @@ using UnityEngine;
 public class CameraMovement : MonoBehaviour
 {
 
-    public Transform player;
+    public GameObject player;
     public Vector3 offset;
 
     // Update is called once per frame
     void Update()
     {
+        if (player == null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player");
+        }
         if (!float.IsNaN(transform.position.x))
         {
-            transform.position = player.position + offset;
+            transform.position = player.transform.position + offset;
         }
+        return;
     }
 }
 

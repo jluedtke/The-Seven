@@ -4,7 +4,7 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
     public float moveSpeed = 3f;
-    private float gridSize = 2f;
+    private float gridSize = 1f;
     private enum Orientation
     {
         Horizontal,
@@ -26,6 +26,8 @@ public class EnemyMovement : MonoBehaviour
     private float counter = 0f;
     private float moveRange = 5f; //Speed
     private bool coroutineDone = true;
+
+    private LayerMask finalMask = (1 << 9) | (1 << 11);
 
     // Use this for initialization
     void Start()
@@ -49,10 +51,39 @@ public class EnemyMovement : MonoBehaviour
         if (Mathf.Abs(target.position.x - transform.position.x) < .1f)
         {
             yDir = target.position.y > transform.position.y ? 1 : -1;
+            Vector2 raycastVector = new Vector2(transform.position.x, transform.position.y + yDir);
+            RaycastHit2D hit = Physics2D.Linecast(transform.position, raycastVector, (1 << 11)); //FUCKING LAYERS DUDE!
+            if (hit)
+            {
+                xDir = 1;
+                yDir = 0;
+                raycastVector = new Vector2(transform.position.x + xDir, transform.position.y);
+                hit = Physics2D.Linecast(transform.position, raycastVector, (1 << 11));
+                if (hit)
+                {
+                    xDir = -1;
+                }
+            }
+
         }
         else
         {
             xDir = target.position.x > transform.position.x ? 1 : -1;
+            Vector2 raycastVector = new Vector2(transform.position.x + xDir, transform.position.y);
+            RaycastHit2D hit = Physics2D.Linecast(transform.position, raycastVector, (1 << 11)); //FUCKING LAYERS DUDE!
+            if (hit)
+            {
+                yDir = 1;
+                xDir = 0;
+                raycastVector = new Vector2(transform.position.x, transform.position.y + yDir);
+                hit = Physics2D.Linecast(transform.position, raycastVector, (1 << 11));
+                if (hit || transform.position.y + yDir > target.transform.position.y)
+                {
+                    yDir = -1;
+                }
+
+            }
+
         }
 
 
@@ -96,11 +127,11 @@ public class EnemyMovement : MonoBehaviour
                 startPosition.y + System.Math.Sign(input.y) * gridSize, startPosition.z);
         }
 
-        RaycastHit2D hit = Physics2D.Linecast(startPosition, endPosition, 1<<9); //FUCKING LAYERS DUDE!
+        RaycastHit2D hit = Physics2D.Linecast(startPosition, endPosition, finalMask); //FUCKING LAYERS DUDE!
         if (hit.collider != null)
         {
             Debug.Log(hit.collider.name);
-            if (hit.collider.name == "Player")
+            if (hit.collider.tag == "Player")
             {
                 //tell to attack or something if melee
                 Debug.Log(hit.collider.name);
@@ -110,6 +141,7 @@ public class EnemyMovement : MonoBehaviour
 
                 StopAllCoroutines();
             }
+
             yield return null;
 
         }
