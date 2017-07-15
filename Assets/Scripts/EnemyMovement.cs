@@ -133,6 +133,7 @@ public class EnemyMovement : MonoBehaviour
             Debug.Log(hit.collider.name);
             if (hit.collider.tag == "Player")
             {
+                counter = 0;
                 //tell to attack or something if melee
                 Debug.Log(hit.collider.name);
                 isMoving = false;

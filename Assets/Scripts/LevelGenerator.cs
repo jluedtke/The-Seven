@@ -4,13 +4,16 @@ public class LevelGenerator : MonoBehaviour {
 
     public Texture2D map;
 
+    public GameObject aStar;
+
     public ColorToPrefab[] colorMappings;
 
 	// Update is called once per frame
 	void Start () {
         GenerateLevel();
-
-	}
+        aStar.GetComponent<Grid>().AwakeGrid();
+        aStar.GetComponent<Pathfinding>().AwakePathfind();
+    }
 
     void GenerateLevel()
     {
