@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
         Vertical
     };
     private Orientation gridOrientation = Orientation.Horizontal;
-    private bool allowDiagonals = false;
+    private bool allowDiagonals = true;
     private bool correctDiagonalSpeed = true;
     public Vector2 input;
     private bool isMoving = false;

@@ -12,7 +12,6 @@ public class LevelGenerator : MonoBehaviour {
 	void Start () {
         GenerateLevel();
         aStar.GetComponent<Grid>().AwakeGrid();
-        aStar.GetComponent<Pathfinding>().AwakePathfind();
     }
 
     void GenerateLevel()
