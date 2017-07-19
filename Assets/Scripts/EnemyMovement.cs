@@ -11,9 +11,7 @@ public class EnemyMovement : MonoBehaviour
         Horizontal,
         Vertical
     };
-    private Orientation gridOrientation = Orientation.Horizontal;
     public bool allowDiagonals = false;
-    private bool correctDiagonalSpeed = true;
     public Vector2 input;
     public bool isMoving = false;
     private Vector3 startPosition;
@@ -22,7 +20,6 @@ public class EnemyMovement : MonoBehaviour
     private float factor;
 
     private GameObject gameManager;
-    private Transform target;
 
     private float counter = 0f;
     private float moveRange = 5f; //Speed
@@ -36,7 +33,6 @@ public class EnemyMovement : MonoBehaviour
     void Start()
     {
         gameManager = GameObject.Find("GameManager");
-        target = GameObject.FindGameObjectWithTag("Player").transform;
         InvokeRepeating("AttemptMove", 0f, .5f); // call 10 per/sec
     }
 
@@ -96,9 +92,21 @@ public class EnemyMovement : MonoBehaviour
 
         }
 
-        if (allowDiagonals && correctDiagonalSpeed && input.x != 0 && input.y != 0)
+        if (Mathf.Abs(startPosition.x - endPosition.x) == 1 && Mathf.Abs(startPosition.y - endPosition.y) == 1)
         {
+            if (counter + 2 >= moveRange)
+            {
+                isMoving = false;
+                coroutineDone = true;
+                gameManager.GetComponent<GameManager>().playerTurn = true; // take out later, just use for melee only scripts.
+
+                StopAllCoroutines();
+            }
+            counter++;
+
             factor = 0.7071f;
+            yield return null;
+
         }
         else
         {
@@ -114,7 +122,7 @@ public class EnemyMovement : MonoBehaviour
 
         counter++; 
 
-        if (counter == moveRange)
+        if (counter >= moveRange)
         {
             counter = 0;
             isMoving = false;

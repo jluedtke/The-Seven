@@ -108,7 +108,15 @@ public class PlayerMovement : MonoBehaviour
 
         if (allowDiagonals && correctDiagonalSpeed && input.x != 0 && input.y != 0)
         {
+            if (counter + 2 >= moveRange)
+            {
+                isMoving = false;
+                coroutineDone = true;
+                StopAllCoroutines();
+            }
+            counter++;
             factor = 0.7071f;
+            yield return null;
         }
         else
         {
@@ -133,7 +141,7 @@ public class PlayerMovement : MonoBehaviour
         //should allow for multiple moves per turn. 
         //Need to put on parent class and call from there
 
-        if (counter == moveRange)
+        if (counter >= moveRange)
         {
             counter = 0;
             isMoving = false;
