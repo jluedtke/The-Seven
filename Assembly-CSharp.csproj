@@ -55,19 +55,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\CharacterStats.cs" />
     <Compile Include="Assets\Scripts\Abstract_Templates\GridMove.cs" />
-    <Compile Include="Assets\Scripts\CameraMovement.cs" />
+    <Compile Include="Assets\Scripts\Classes\Heretic.cs" />
     <Compile Include="Assets\Scripts\ColorToPrefab.cs" />
     <Compile Include="Assets\Scripts\EnemyMovement.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\General\CharacterStats.cs" />
+    <Compile Include="Assets\Scripts\General\Pathfinding.cs" />
     <Compile Include="Assets\Scripts\Grid.cs" />
     <Compile Include="Assets\Scripts\LevelGenerator.cs" />
     <Compile Include="Assets\Scripts\Node.cs" />
-    <Compile Include="Assets\Scripts\Pathfinding.cs" />
-    <Compile Include="Assets\Scripts\PlayerMovement.cs" />
-    <Compile Include="Assets\Scripts\PlayerSpawn.cs" />
-    <Compile Include="Assets\Scripts\SpriteChanger.cs" />
+    <Compile Include="Assets\Scripts\Player\CameraMovement.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerSpawn.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerStats.cs" />
+    <Compile Include="Assets\Scripts\Player\SpriteChanger.cs" />
     <Compile Include="Assets\Scripts\Unused\Enemy.cs" />
     <Compile Include="Assets\Scripts\Unused\EnemySpawn.cs" />
     <Compile Include="Assets\Scripts\Unused\MovingObject.cs" />
