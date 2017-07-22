@@ -25,7 +25,7 @@ If you wish to work with/improve the code here:
 5. Using Unity, navigate to project folder.
 
 ## Known Bugs
-* Game does not work
+It's bloody riddled with them. Adds character, creates challenges. Good Luck.
 
 ## Technologies Used
 * Unity3D
