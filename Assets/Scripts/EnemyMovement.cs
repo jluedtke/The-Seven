@@ -22,7 +22,7 @@ public class EnemyMovement : MonoBehaviour
     private GameObject gameManager;
 
     private float counter = 0f;
-    private float moveRange = 5f; //Speed
+    public float moveRange = 5f; //grabbed from stats. Default 5 for "Eh" effect
     private bool coroutineDone = true;
 
     public List<Node> path;

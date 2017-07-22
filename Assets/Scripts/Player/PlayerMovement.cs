@@ -24,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
     private GameObject gameManager;
 
     private float counter = 0f;
-    public float moveRange = 5f; //Default, PlayerStats changes it.
+    public float moveRange = 5f; //Default, PlayerStats changes it inside of PlayerStats script.
     private bool coroutineDone = true;
 
     public SpriteChanger spriteChanger;

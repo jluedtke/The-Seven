@@ -2,18 +2,17 @@
 
 public class PlayerSpawn : MonoBehaviour {
 
-    public GameObject playerPrefab;
+    public GameObject Player;
 
     private Transform waypoint;
 
     // Use this for initialization
     void Start () {
-
-        if (playerPrefab != null)
+        Player = GameObject.Find("Player");
+        if (Player != null)
         {
             waypoint = transform.GetChild(1);
-            Instantiate(playerPrefab, waypoint.position, Quaternion.identity, transform);
-
+            Player.transform.position = waypoint.transform.position;
         }
     }
 }
