@@ -60,6 +60,14 @@ public class Stats : MonoBehaviour {
         }
     }
 
+    private void Update()
+    {
+        if (currentHP <= 0)
+        {
+            DestroyObject(gameObject);
+        }
+    }
+
     void GetStats()
     {
         STR += _className.STR;

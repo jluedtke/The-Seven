@@ -22,23 +22,6 @@ public class PlayerActions : MonoBehaviour {
         mAction = 0;
     }
 
-    void OnMouseDown()
-    {
-        Debug.Log("Hovering");
-        if (gameObject.GetComponentInChildren<SpriteRenderer>().material.color == Color.red)
-        {
-            gameObject.GetComponentInChildren<SpriteRenderer>().material.color = Color.yellow;
-        }
-    }
-
-    void OnMouseExit()
-    {
-        if (gameObject.GetComponentInChildren<SpriteRenderer>().material.color == Color.yellow)
-        {
-            gameObject.GetComponentInChildren<SpriteRenderer>().material.color = originalColor;
-        }
-    }
-
     public void FindEnemyToAttack () {
         //if (pAction >= 1)
         //{
@@ -54,7 +37,6 @@ public class PlayerActions : MonoBehaviour {
             {
                 if (enemies[ii] == hits[i].gameObject)
                 {
-                    Debug.Log("Enemy Hit");
                     originalColor = hits[i].gameObject.GetComponentInChildren< SpriteRenderer>().material.color;
                     hits[i].gameObject.GetComponentInChildren<SpriteRenderer>().material.color = Color.red;
                 }
@@ -70,18 +52,21 @@ public class PlayerActions : MonoBehaviour {
 
 
 
-    //void AttackEnemy(GameObject enemy)
-    //{
-    //    if (Contains(enemies, enemy))
-    //    {
-    //        enemy.GetComponent<Stats>().currentHP -= player.DMG;
-    //        for (int ii = 0; ii < enemies.Length; ii++)
-    //        {
-    //            enemies[ii].GetComponent<Renderer>().material.color = originalColor;
-    //        }
-    //        SpendPAction();
-    //    }
-    //}
+    public void Attack(GameObject enemy)
+    {
+        SpendPAction();
+        enemy.GetComponent<Stats>().currentHP -= player.DMG;
+        enemy.GetComponent<Turn>().CheckForDeath();
+
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            if (enemies[i] != null)
+            {
+                enemies[i].GetComponentInChildren<SpriteRenderer>().material.color = originalColor;
+            }
+        }
+
+    }
 
     public void Heal()
     {

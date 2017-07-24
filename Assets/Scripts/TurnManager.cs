@@ -9,8 +9,12 @@ public class TurnManager : MonoBehaviour {
     private GameObject[] enemies;
     private bool turnsSet = false;
 
+    private int index;
+
 	// Use this for initialization
 	public void StartTurnOrder () {
+        index = 0;
+
         if (!(GameObject.FindGameObjectWithTag("Player")) || turnsSet)
         {
             return;
@@ -26,7 +30,12 @@ public class TurnManager : MonoBehaviour {
 
     void OnRenderObject()
     {
+        if (turnsSet)
+        {
+            return;
+        }
         StartTurnOrder();
+        turnsSet = true;
     }
 	
     void SetTurns()
@@ -35,51 +44,28 @@ public class TurnManager : MonoBehaviour {
             return;
 
         turnOrder = combatants;    
-
         turnOrder.Sort((p1, p2) => p1.GetComponent<Stats>().init.CompareTo(p2.GetComponent<Stats>().init));
-
         turnOrder.Reverse();
 
-        for (int i = 0; i < turnOrder.Count; i++)
-        {
-            Debug.Log(turnOrder[i].GetComponent<Stats>().init);
-        }
         turnsSet = true;
-        ManageTurn();
+        DoTurns();
     }
 
-    bool hasInit(List<GameObject> people)
-    {
-        for (int i = 0; i < people.Count; i++)
-        {
-            if (people[i].GetComponent<Stats>().init != 0)
-                return true;
-        }   
 
-        return false;
-    }
-
-    void ManageTurn()
+    void DoTurns()
     {
-        if (!turnOrder[0].GetComponent<Turn>().myTurn)
+        if (index > turnOrder.Count - 1)
         {
-            turnOrder[0].GetComponent<Turn>().myTurn = true;
+            index = 0;
         }
-        else
-        {
-            turnOrder[0].GetComponent<Turn>().myTurn = false;
-            turnOrder[0].GetComponent<Turn>().startTurnInitiated = false;
-
-            passTurn();
-        }
-
+        turnOrder[index].GetComponent<Turn>().myTurn = true;
     }
 
-    void passTurn()
+    public void NextTurn()
     {
-        GameObject tempObject = turnOrder[0];
-        turnOrder.Remove(turnOrder[0]);
-        turnOrder.Add(tempObject);
-        ManageTurn();
+        turnOrder[index].GetComponent<Turn>().myTurn = false;
+        index++;
+        DoTurns();
     }
+
 }

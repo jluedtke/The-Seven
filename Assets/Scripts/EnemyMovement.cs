@@ -19,9 +19,7 @@ public class EnemyMovement : MonoBehaviour
     private float t;
     private float factor;
 
-    private GameObject gameManager;
-
-    private float counter = 0f;
+    public float counter = 0f;
     public float moveRange = 5f; //grabbed from stats. Default 5 for "Eh" effect
     private bool coroutineDone = true;
 
@@ -29,16 +27,26 @@ public class EnemyMovement : MonoBehaviour
 
     private LayerMask finalMask = (1 << 9) | (1 << 11);
 
+    private Turn thisTurn;
+
     // Use this for initialization
     void Start()
     {
-        gameManager = GameObject.Find("GameManager");
-        InvokeRepeating("AttemptMove", 0f, .5f); // call 10 per/sec
+        counter = 0f;
+        thisTurn = GetComponent<Turn>();
+    }
+
+    public void DoMovement()
+    {
+        if (thisTurn.myTurn)
+        {
+            AttemptMove();
+        }
     }
 
     public void AttemptMove()
     {
-        if (!coroutineDone || isMoving || gameManager.GetComponent<GameManager>().playerTurn)
+        if (!coroutineDone || isMoving || !thisTurn.myTurn)
         {
             return;
         }
@@ -50,7 +58,7 @@ public class EnemyMovement : MonoBehaviour
         yDir = path[0].worldPosition.y;
 
 
-        if (!isMoving)
+        if (!isMoving && counter < moveRange)
         {
             input = new Vector2(xDir, yDir);
 
@@ -78,13 +86,10 @@ public class EnemyMovement : MonoBehaviour
             Debug.Log(hit.collider.name);
             if (hit.collider.tag == "Player")
             {
-                counter = 0;
-                //tell to attack or something if melee
-                Debug.Log(hit.collider.name);
+                GetComponent<EnemyActions>().AttackPlayer();
                 isMoving = false;
                 coroutineDone = true;
-                gameManager.GetComponent<GameManager>().playerTurn = true; // take out later, just use for melee only scripts.
-
+                thisTurn.EndTurn();
                 StopAllCoroutines();
             }
 
@@ -98,8 +103,7 @@ public class EnemyMovement : MonoBehaviour
             {
                 isMoving = false;
                 coroutineDone = true;
-                gameManager.GetComponent<GameManager>().playerTurn = true; // take out later, just use for melee only scripts.
-
+                thisTurn.EndTurn();
                 StopAllCoroutines();
             }
             counter++;
@@ -124,18 +128,15 @@ public class EnemyMovement : MonoBehaviour
 
         if (counter >= moveRange)
         {
-            counter = 0;
             isMoving = false;
-            // Do I need this?
-            // yield return new WaitForSeconds(2f); 
-            gameManager.GetComponent<GameManager>().playerTurn = true;
+            thisTurn.EndTurn();
             coroutineDone = true;
             StopAllCoroutines();
         }
 
-        
         isMoving = false;
         coroutineDone = true;
+        AttemptMove();
         yield return 0;
     }
 }

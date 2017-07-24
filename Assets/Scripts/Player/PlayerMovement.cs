@@ -21,10 +21,8 @@ public class PlayerMovement : MonoBehaviour
     private float t;
     private float factor;
 
-    private GameObject gameManager;
-
-    private float counter = 0f;
-    public float moveRange = 5f; //Default, PlayerStats changes it inside of PlayerStats script.
+    public float counter;
+    public float moveRange; //Default, PlayerStats changes it inside of PlayerStats script.
     private bool coroutineDone = true;
 
     public SpriteChanger spriteChanger;
@@ -34,13 +32,13 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        gameManager = GameObject.Find("GameManager");
         spriteChanger = GetComponentInChildren<SpriteChanger>();
+        counter = 0f;
     }
 
     public void Update()
     {
-        if (gameManager.GetComponent<GameManager>().playerTurn == false)
+        if (!GetComponent<Turn>().myTurn)
         {
             return;
         }
@@ -63,7 +61,10 @@ public class PlayerMovement : MonoBehaviour
             if (input != Vector2.zero && coroutineDone)
             {
                 coroutineDone = false;
-                StartCoroutine(Move(transform));
+                if (counter < moveRange)
+                {
+                    StartCoroutine(Move(transform));
+                }
             }
         }
     }
@@ -124,11 +125,12 @@ public class PlayerMovement : MonoBehaviour
             factor = 1f;
         }
 
-        if (counter == moveRange)
+        if (counter >= moveRange)
         {
             isMoving = false;
             StopAllCoroutines();
         }
+        counter++;
 
         while (t < 1f)
         {
@@ -138,19 +140,6 @@ public class PlayerMovement : MonoBehaviour
             yield return null;
         }
 
-        counter++; //Should be on game manager
-        //should allow for multiple moves per turn. 
-        //Need to put on parent class and call from there
-
-        if (counter >= moveRange)
-        {
-            counter = 0;
-            isMoving = false;
-            yield return new WaitForSeconds(2f); //Throw this on the turn caller
-            gameManager.GetComponent<GameManager>().playerTurn = false; //turn to true when testing Player Movement
-            coroutineDone = true;
-            StopAllCoroutines();
-        }
 
         isMoving = false;
         coroutineDone = true;
