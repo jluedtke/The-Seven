@@ -1,21 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <LangVersion>4</LangVersion>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <ProjectGuid>{22E85BBA-CCBA-4ABF-276F-D2AB5223162C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>Assets</BaseDirectory>
   </PropertyGroup>
@@ -29,7 +27,6 @@
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169</NoWarn>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -39,7 +36,6 @@
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169</NoWarn>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -55,49 +51,50 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\EnemyActions.cs" />
-    <Compile Include="Assets\PlayerActions.cs" />
-    <Compile Include="Assets\Scripts\Abstract_Templates\GridMove.cs" />
-    <Compile Include="Assets\Scripts\Classes\Heretic.cs" />
-    <Compile Include="Assets\Scripts\ColorToPrefab.cs" />
-    <Compile Include="Assets\Scripts\EnemyMovement.cs" />
-    <Compile Include="Assets\Scripts\GameManager.cs" />
-    <Compile Include="Assets\Scripts\General\CharacterStats.cs" />
-    <Compile Include="Assets\Scripts\General\Pathfinding.cs" />
-    <Compile Include="Assets\Scripts\Grid.cs" />
-    <Compile Include="Assets\Scripts\LevelGenerator.cs" />
-    <Compile Include="Assets\Scripts\Node.cs" />
-    <Compile Include="Assets\Scripts\Player\CameraMovement.cs" />
-    <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
-    <Compile Include="Assets\Scripts\Player\PlayerSpawn.cs" />
-    <Compile Include="Assets\Scripts\Player\SpriteChanger.cs" />
-    <Compile Include="Assets\Scripts\Player\Stats.cs" />
-    <Compile Include="Assets\Scripts\Unused\Enemy.cs" />
-    <Compile Include="Assets\Scripts\Unused\EnemySpawn.cs" />
-    <Compile Include="Assets\Scripts\Unused\MovingObject.cs" />
-    <Compile Include="Assets\Turn.cs" />
-    <Compile Include="Assets\TurnManager.cs" />
-    <Reference Include="UnityEngine.UI">
-      <HintPath>C:/Users/epicodus/Desktop/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Networking">
-      <HintPath>C:/Users/epicodus/Desktop/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.TestRunner">
-      <HintPath>C:/Users/epicodus/Desktop/Editor/Data/UnityExtensions/Unity/TestRunner/UnityEngine.TestRunner.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.framework">
-      <HintPath>C:/Users/epicodus/Desktop/Editor/Data/UnityExtensions/Unity/TestRunner/net35/unity-custom/nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Timeline">
-      <HintPath>C:/Users/epicodus/Desktop/Editor/Data/UnityExtensions/Unity/Timeline/RuntimeEditor/UnityEngine.Timeline.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Analytics">
-      <HintPath>C:/Users/epicodus/Desktop/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.HoloLens">
-      <HintPath>C:/Users/epicodus/Desktop/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
-    </Reference>
+     <Compile Include="Assets\FromPlayerToEnemy.cs" />
+     <Compile Include="Assets\Scripts\Abstract_Templates\GridMove.cs" />
+     <Compile Include="Assets\Scripts\Classes\Heretic.cs" />
+     <Compile Include="Assets\Scripts\ColorToPrefab.cs" />
+     <Compile Include="Assets\Scripts\EnemyActions.cs" />
+     <Compile Include="Assets\Scripts\EnemyMovement.cs" />
+     <Compile Include="Assets\Scripts\GameManager.cs" />
+     <Compile Include="Assets\Scripts\General\CharacterStats.cs" />
+     <Compile Include="Assets\Scripts\General\Pathfinding.cs" />
+     <Compile Include="Assets\Scripts\Grid.cs" />
+     <Compile Include="Assets\Scripts\LevelGenerator.cs" />
+     <Compile Include="Assets\Scripts\Node.cs" />
+     <Compile Include="Assets\Scripts\Player\CameraMovement.cs" />
+     <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
+     <Compile Include="Assets\Scripts\Player\PlayerSpawn.cs" />
+     <Compile Include="Assets\Scripts\Player\SpriteChanger.cs" />
+     <Compile Include="Assets\Scripts\Player\Stats.cs" />
+     <Compile Include="Assets\Scripts\PlayerActions.cs" />
+     <Compile Include="Assets\Scripts\Turn.cs" />
+     <Compile Include="Assets\Scripts\TurnManager.cs" />
+     <Compile Include="Assets\Scripts\Unused\Enemy.cs" />
+     <Compile Include="Assets\Scripts\Unused\EnemySpawn.cs" />
+     <Compile Include="Assets\Scripts\Unused\MovingObject.cs" />
+ <Reference Include="UnityEngine.UI">
+ <HintPath>C:/Users/epicodus/Desktop/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Networking">
+ <HintPath>C:/Users/epicodus/Desktop/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.TestRunner">
+ <HintPath>C:/Users/epicodus/Desktop/Editor/Data/UnityExtensions/Unity/TestRunner/UnityEngine.TestRunner.dll</HintPath>
+ </Reference>
+ <Reference Include="nunit.framework">
+ <HintPath>C:/Users/epicodus/Desktop/Editor/Data/UnityExtensions/Unity/TestRunner/net35/unity-custom/nunit.framework.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Timeline">
+ <HintPath>C:/Users/epicodus/Desktop/Editor/Data/UnityExtensions/Unity/Timeline/RuntimeEditor/UnityEngine.Timeline.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Analytics">
+ <HintPath>C:/Users/epicodus/Desktop/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.HoloLens">
+ <HintPath>C:/Users/epicodus/Desktop/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
+ </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -107,4 +104,5 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  
 </Project>

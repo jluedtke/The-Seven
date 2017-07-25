@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
         Vertical
     };
     private Orientation gridOrientation = Orientation.Horizontal;
-    private bool allowDiagonals = true;
+    private bool allowDiagonals = false;
     private bool correctDiagonalSpeed = true;
     public Vector2 input;
     private bool isMoving = false;
@@ -110,13 +110,14 @@ public class PlayerMovement : MonoBehaviour
 
         if (allowDiagonals && correctDiagonalSpeed && input.x != 0 && input.y != 0)
         {
-            if (counter + 2 >= moveRange)
+            if (counter + 2 > moveRange)
             {
                 isMoving = false;
                 coroutineDone = true;
                 StopAllCoroutines();
+
+                yield return null;
             }
-            counter++;
             factor = 0.7071f;
             yield return null;
         }
@@ -125,12 +126,14 @@ public class PlayerMovement : MonoBehaviour
             factor = 1f;
         }
 
-        if (counter >= moveRange)
+        if (counter > moveRange)
         {
             isMoving = false;
             StopAllCoroutines();
         }
+
         counter++;
+
 
         while (t < 1f)
         {
@@ -143,6 +146,7 @@ public class PlayerMovement : MonoBehaviour
 
         isMoving = false;
         coroutineDone = true;
+        StopAllCoroutines();
         yield return 0;
     }
 }

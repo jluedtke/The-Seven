@@ -58,7 +58,16 @@ public class TurnManager : MonoBehaviour {
         {
             index = 0;
         }
-        turnOrder[index].GetComponent<Turn>().myTurn = true;
+        if (turnOrder[index])
+        {
+            turnOrder[index].GetComponent<Turn>().myTurn = true;
+        }
+        else
+        {
+            index++;
+            DoTurns();
+        }
+
     }
 
     public void NextTurn()

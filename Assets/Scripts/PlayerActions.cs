@@ -9,24 +9,32 @@ public class PlayerActions : MonoBehaviour {
     public LayerMask mask;
 
 
-    private GameObject[] enemies;
+    public GameObject[] enemies;
 
-    private Color originalColor;
+    public Color originalColor;
 
     private Stats player;
+    private Turn thisTurn;
 
     void Start()
     {
         player = GetComponent<Stats>();
+        thisTurn = GetComponent<Turn>();
         pAction = 0;
         mAction = 0;
     }
 
     public void FindEnemyToAttack () {
-        //if (pAction >= 1)
-        //{
-        //    return;
-        //}
+
+        if (!thisTurn.myTurn)
+        {
+            return;
+        }
+
+        if (pAction >= 1)
+        {
+            return;
+        }
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, 1f, mask);
@@ -54,6 +62,11 @@ public class PlayerActions : MonoBehaviour {
 
     public void Attack(GameObject enemy)
     {
+        if (!thisTurn.myTurn)
+        {
+            return;
+        }
+
         SpendPAction();
         enemy.GetComponent<Stats>().currentHP -= player.DMG;
         enemy.GetComponent<Turn>().CheckForDeath();
@@ -70,6 +83,10 @@ public class PlayerActions : MonoBehaviour {
 
     public void Heal()
     {
+        if (!thisTurn.myTurn)
+        {
+            return;
+        }
         if (mAction == 1)
         {
             if (pAction == 1)

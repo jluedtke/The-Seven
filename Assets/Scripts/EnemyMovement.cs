@@ -20,7 +20,7 @@ public class EnemyMovement : MonoBehaviour
     private float factor;
 
     public float counter = 0f;
-    public float moveRange = 5f; //grabbed from stats. Default 5 for "Eh" effect
+    public float moveRange = 5f; //grabbed from stats
     private bool coroutineDone = true;
 
     public List<Node> path;
@@ -38,10 +38,10 @@ public class EnemyMovement : MonoBehaviour
 
     public void DoMovement()
     {
-        if (thisTurn.myTurn)
-        {
+        //if (thisTurn.myTurn)
+        //{
             AttemptMove();
-        }
+        //}
     }
 
     public void AttemptMove()
@@ -56,6 +56,14 @@ public class EnemyMovement : MonoBehaviour
 
         xDir = path[0].worldPosition.x;
         yDir = path[0].worldPosition.y;
+
+        if (GameObject.Find("Player").transform.position.x == xDir && GameObject.Find("Player").transform.position.y == yDir)
+        {
+            GetComponent<EnemyActions>().AttackPlayer();
+            isMoving = false;
+            coroutineDone = true;
+            return;
+        }
 
 
         if (!isMoving && counter < moveRange)
@@ -80,16 +88,15 @@ public class EnemyMovement : MonoBehaviour
         endPosition = input;
 
 
-        RaycastHit2D hit = Physics2D.Linecast(startPosition, endPosition, finalMask); //FUCKING LAYERS DUDE!
+        RaycastHit2D hit = Physics2D.Linecast(startPosition, endPosition, finalMask); 
         if (hit.collider != null)
         {
             Debug.Log(hit.collider.name);
             if (hit.collider.tag == "Player")
             {
-                GetComponent<EnemyActions>().AttackPlayer();
                 isMoving = false;
                 coroutineDone = true;
-                thisTurn.EndTurn();
+                GetComponent<EnemyActions>().AttackPlayer();
                 StopAllCoroutines();
             }
 
@@ -129,8 +136,8 @@ public class EnemyMovement : MonoBehaviour
         if (counter >= moveRange)
         {
             isMoving = false;
-            thisTurn.EndTurn();
             coroutineDone = true;
+            thisTurn.EndTurn();
             StopAllCoroutines();
         }
 

@@ -10,20 +10,28 @@ public class EnemyActions : MonoBehaviour {
 
 
     private Stats playerStats;
+    private Turn thisTurn; 
 
     void Start()
     {
+        thisTurn = GetComponent<Turn>();
         playerStats = GameObject.Find("Player").GetComponent<Stats>();
     }
 
     public void AttackPlayer()
     {
-        if (pAction > 0)
+        if (pAction >= 1)
         {
+            Debug.Log("Here");
+            thisTurn.EndTurn();
             return;
         }
+        Debug.Log("Here MK");
+
         SpendPAction();
         playerStats.currentHP -= GetComponent<Stats>().DMG;
+
+        thisTurn.EndTurn();
     }
 
     void SpendMAction()

@@ -30,16 +30,20 @@ public class Turn : MonoBehaviour {
 
     void Update()
     {
-        if (myTurn && !startTurnInitiated)
-        {
-            Debug.Log("Boop");
-            StartTurn();
-            startTurnInitiated = true;
-        }
+        StartTurn();
     }
 
 	void StartTurn () {
-		if (transform.gameObject.name == "Player")
+        if (!myTurn || startTurnInitiated)
+        {
+            return;
+        }
+        if (myTurn)
+        {
+            startTurnInitiated = true;
+        }
+
+        if (transform.gameObject.name == "Player")
         {
             pMovement.counter = 0;
             pActions.mAction = 0;
@@ -60,12 +64,32 @@ public class Turn : MonoBehaviour {
 
     public void EndTurn()
     {
-        if (!myTurn)
+        if (!myTurn && gameObject.name == "Player")
         {
             return;
         }
         myTurn = false;
         startTurnInitiated = false;
+
+        if (transform.gameObject.name == "Player")
+        {
+            for (int i = 0; i < pActions.enemies.Length; i++)
+            {
+                if (pActions.enemies[i] != null)
+                {
+                    pActions.enemies[i].GetComponentInChildren<SpriteRenderer>().material.color = pActions.originalColor;
+                }
+            }
+        }
+        else
+        {
+            eMovement.counter = 0;
+            eActions.mAction = 0;
+            eActions.pAction = 0;
+            print("Running");
+
+        }
+
         GameObject.Find("GameManager").GetComponent<TurnManager>().NextTurn();
     }
 
