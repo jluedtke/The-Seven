@@ -4,26 +4,36 @@ using UnityEngine;
 
 
 [System.Serializable]
-public class GameManager : MonoBehaviour {
+public class GameManager : MonoBehaviour
+{
 
     public static GameManager instance = null;
+    public PlayerActions pActions;
+    public TurnManager battleManager;
 
-    public bool playerTurn = false;
+
 
     void Awake()
     {
         instance = this;
     }
 
-    // Use this for initialization
     void Start()
     {
-
+        pActions = GameObject.Find("Player").GetComponent<PlayerActions>();
+        battleManager = GameObject.Find("BattleManager").GetComponent<TurnManager>();
     }
 
 
     // Update is called once per frame
-    void Update () {
-		
-	}
+    void Update()
+    {
+        if (pActions.enemies.Count <= 0)
+        {
+            battleManager.gameObject.SetActive(false);
+        } else
+        {
+            battleManager.gameObject.SetActive(true);
+        }
+    }
 }

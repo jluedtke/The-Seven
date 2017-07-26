@@ -38,10 +38,7 @@ public class EnemyMovement : MonoBehaviour
 
     public void DoMovement()
     {
-        //if (thisTurn.myTurn)
-        //{
-            AttemptMove();
-        //}
+         AttemptMove();
     }
 
     public void AttemptMove()

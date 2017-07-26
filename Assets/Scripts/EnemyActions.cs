@@ -22,12 +22,9 @@ public class EnemyActions : MonoBehaviour {
     {
         if (pAction >= 1)
         {
-            Debug.Log("Here");
             thisTurn.EndTurn();
             return;
         }
-        Debug.Log("Here MK");
-
         SpendPAction();
         playerStats.currentHP -= GetComponent<Stats>().DMG;
 

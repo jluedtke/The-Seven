@@ -9,7 +9,7 @@ public class PlayerActions : MonoBehaviour {
     public LayerMask mask;
 
 
-    public GameObject[] enemies;
+    public List<GameObject> enemies;
 
     public Color originalColor;
 
@@ -22,9 +22,27 @@ public class PlayerActions : MonoBehaviour {
         thisTurn = GetComponent<Turn>();
         pAction = 0;
         mAction = 0;
+        InvokeRepeating("DefineEnemies", 1f, 1f);
+    }
+
+    public List<GameObject> DefineEnemies()
+    {
+        enemies = new List<GameObject>();
+        Collider2D[] enemyColliders = Physics2D.OverlapCircleAll(transform.position, 8f, mask);
+        if (enemyColliders.Length > 0)
+        {
+            for (int x = 0; x < enemyColliders.Length; x++)
+            {
+                enemies.Add(enemyColliders[x].gameObject);
+            }
+        }
+
+        return enemies;
     }
 
     public void FindEnemyToAttack () {
+
+        DefineEnemies();
 
         if (!thisTurn.myTurn)
         {
@@ -35,13 +53,12 @@ public class PlayerActions : MonoBehaviour {
         {
             return;
         }
-        enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, 1f, mask);
 
         for (int i = 0; i < hits.Length; i++)
         {
-            for (int ii = 0; ii < enemies.Length; ii++)
+            for (int ii = 0; ii < enemies.Count; ii++)
             {
                 if (enemies[ii] == hits[i].gameObject)
                 {
@@ -56,6 +73,8 @@ public class PlayerActions : MonoBehaviour {
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, 1f);
+        Gizmos.DrawWireSphere(transform.position, 8f);
+
     }
 
 
@@ -71,7 +90,7 @@ public class PlayerActions : MonoBehaviour {
         enemy.GetComponent<Stats>().currentHP -= player.DMG;
         enemy.GetComponent<Turn>().CheckForDeath();
 
-        for (int i = 0; i < enemies.Length; i++)
+        for (int i = 0; i < enemies.Count; i++)
         {
             if (enemies[i] != null)
             {

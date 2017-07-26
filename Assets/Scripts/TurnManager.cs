@@ -6,7 +6,7 @@ public class TurnManager : MonoBehaviour {
 
     public List<GameObject> combatants;
     public List<GameObject> turnOrder;
-    private GameObject[] enemies;
+    private List<GameObject> enemies;
     private bool turnsSet = false;
 
     private int index;
@@ -19,9 +19,11 @@ public class TurnManager : MonoBehaviour {
         {
             return;
         }
+        turnsSet = true;
+
         combatants.Add(GameObject.FindGameObjectWithTag("Player"));
-        enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        for (int i = 0; i < enemies.Length; i++)
+        enemies = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerActions>().DefineEnemies();
+        for (int i = 0; i < enemies.Count; i++)
         {
             combatants.Add(enemies[i]);
         }
@@ -35,14 +37,10 @@ public class TurnManager : MonoBehaviour {
             return;
         }
         StartTurnOrder();
-        turnsSet = true;
     }
 	
     void SetTurns()
     {
-        if (turnsSet)
-            return;
-
         turnOrder = combatants;    
         turnOrder.Sort((p1, p2) => p1.GetComponent<Stats>().init.CompareTo(p2.GetComponent<Stats>().init));
         turnOrder.Reverse();

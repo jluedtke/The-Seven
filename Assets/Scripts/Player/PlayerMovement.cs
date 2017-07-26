@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour
     private bool allowDiagonals = false;
     private bool correctDiagonalSpeed = true;
     public Vector2 input;
-    private bool isMoving = false;
+    public bool isMoving = false;
     private Vector3 startPosition;
     private Vector3 endPosition;
     private float t;
@@ -23,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
 
     public float counter;
     public float moveRange; //Default, PlayerStats changes it inside of PlayerStats script.
-    private bool coroutineDone = true;
+    public bool coroutineDone = true;
 
     public SpriteChanger spriteChanger;
 
@@ -63,6 +63,7 @@ public class PlayerMovement : MonoBehaviour
                 coroutineDone = false;
                 if (counter < moveRange)
                 {
+                    print("BAMF");
                     StartCoroutine(Move(transform));
                 }
             }

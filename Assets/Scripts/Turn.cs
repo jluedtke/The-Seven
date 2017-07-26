@@ -46,6 +46,8 @@ public class Turn : MonoBehaviour {
         if (transform.gameObject.name == "Player")
         {
             pMovement.counter = 0;
+            pMovement.isMoving = false;
+            pMovement.coroutineDone = true;
             pActions.mAction = 0;
             pActions.pAction = 0;
         }
@@ -73,7 +75,7 @@ public class Turn : MonoBehaviour {
 
         if (transform.gameObject.name == "Player")
         {
-            for (int i = 0; i < pActions.enemies.Length; i++)
+            for (int i = 0; i < pActions.enemies.Count; i++)
             {
                 if (pActions.enemies[i] != null)
                 {
@@ -86,18 +88,25 @@ public class Turn : MonoBehaviour {
             eMovement.counter = 0;
             eActions.mAction = 0;
             eActions.pAction = 0;
-            print("Running");
-
         }
 
-        GameObject.Find("GameManager").GetComponent<TurnManager>().NextTurn();
+        GameObject.Find("BattleManager").GetComponent<TurnManager>().NextTurn();
     }
 
     public void CheckForDeath()
     {
         if (GetComponent<Stats>().currentHP < 0)
         {
-            Destroy(gameObject);
+            if (gameObject.name == "Player")
+            {
+                //Trigger Game Over
+                print("You died.");
+            }
+            else
+            {
+                Destroy(gameObject);
+                GameObject.Find("Player").GetComponent<Turn>().pActions.DefineEnemies();
+            }
         }
     }
 
