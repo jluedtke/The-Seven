@@ -20,13 +20,6 @@ public class TurnManager : MonoBehaviour {
             return;
         }
         turnsSet = true;
-
-        combatants.Add(GameObject.FindGameObjectWithTag("Player"));
-        enemies = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerActions>().DefineEnemies();
-        for (int i = 0; i < enemies.Count; i++)
-        {
-            combatants.Add(enemies[i]);
-        }
         SetTurns();
     }
 
@@ -41,6 +34,19 @@ public class TurnManager : MonoBehaviour {
 	
     void SetTurns()
     {
+        combatants = new List<GameObject>();
+
+        combatants.Add(GameObject.FindGameObjectWithTag("Player"));
+        enemies = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerActions>().DefineEnemies();
+        if (enemies.Count < 1)
+        {
+            return;
+        }
+        for (int i = 0; i < enemies.Count; i++)
+        {
+            combatants.Add(enemies[i]);
+        }
+
         turnOrder = combatants;    
         turnOrder.Sort((p1, p2) => p1.GetComponent<Stats>().init.CompareTo(p2.GetComponent<Stats>().init));
         turnOrder.Reverse();
@@ -55,6 +61,8 @@ public class TurnManager : MonoBehaviour {
         if (index > turnOrder.Count - 1)
         {
             index = 0;
+            SetTurns();
+            return;
         }
         if (turnOrder[index])
         {
@@ -70,7 +78,6 @@ public class TurnManager : MonoBehaviour {
 
     public void NextTurn()
     {
-        turnOrder[index].GetComponent<Turn>().myTurn = false;
         index++;
         DoTurns();
     }

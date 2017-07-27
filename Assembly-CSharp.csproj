@@ -51,7 +51,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\FromPlayerToEnemy.cs" />
      <Compile Include="Assets\Scripts\Abstract_Templates\GridMove.cs" />
      <Compile Include="Assets\Scripts\Classes\Heretic.cs" />
      <Compile Include="Assets\Scripts\ColorToPrefab.cs" />
@@ -64,6 +63,8 @@
      <Compile Include="Assets\Scripts\LevelGenerator.cs" />
      <Compile Include="Assets\Scripts\Node.cs" />
      <Compile Include="Assets\Scripts\Player\CameraMovement.cs" />
+     <Compile Include="Assets\Scripts\Player\FromPlayerToEnemy.cs" />
+     <Compile Include="Assets\Scripts\Player\PlayerManager.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerSpawn.cs" />
      <Compile Include="Assets\Scripts\Player\SpriteChanger.cs" />

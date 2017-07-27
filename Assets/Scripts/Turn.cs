@@ -90,7 +90,10 @@ public class Turn : MonoBehaviour {
             eActions.pAction = 0;
         }
 
-        GameObject.Find("BattleManager").GetComponent<TurnManager>().NextTurn();
+        if (GameObject.Find("BattleManager"))
+        {
+            GameObject.Find("BattleManager").GetComponent<TurnManager>().NextTurn();
+        }
     }
 
     public void CheckForDeath()

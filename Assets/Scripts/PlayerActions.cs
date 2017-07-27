@@ -16,33 +16,64 @@ public class PlayerActions : MonoBehaviour {
     private Stats player;
     private Turn thisTurn;
 
+    private List<Transform> enemyTransforms;
+    private bool allEnemiesFound;
+
     void Start()
     {
         player = GetComponent<Stats>();
         thisTurn = GetComponent<Turn>();
         pAction = 0;
         mAction = 0;
+        allEnemiesFound = false;
         InvokeRepeating("DefineEnemies", 1f, 1f);
+
     }
+
 
     public List<GameObject> DefineEnemies()
     {
+        if (!allEnemiesFound)
+        {
+            enemyTransforms = new List<Transform>();
+            GameObject[] stuff = GameObject.FindGameObjectsWithTag("Enemy");
+            for (int i = 0; i < stuff.Length; i++)
+            {
+                enemyTransforms.Add(stuff[i].transform);
+                stuff[i].SetActive(false);
+            }
+            print("HA");
+            allEnemiesFound = true;
+        }
+
+        foreach (Transform tr in enemyTransforms)
+        {
+            if (!tr)
+            {
+                continue;
+            }
+            float distanceSqr = (transform.position - tr.position).sqrMagnitude;
+            if (distanceSqr < 40)
+                tr.gameObject.SetActive(true);
+        }
+
+
         enemies = new List<GameObject>();
-        Collider2D[] enemyColliders = Physics2D.OverlapCircleAll(transform.position, 8f, mask);
+        Collider2D[] enemyColliders = Physics2D.OverlapCircleAll(transform.position, 6f, mask);
         if (enemyColliders.Length > 0)
         {
             for (int x = 0; x < enemyColliders.Length; x++)
             {
-                enemies.Add(enemyColliders[x].gameObject);
+                if (enemyColliders[x].gameObject.activeInHierarchy)
+                {
+                    enemies.Add(enemyColliders[x].gameObject);
+                }
             }
         }
-
         return enemies;
     }
 
     public void FindEnemyToAttack () {
-
-        DefineEnemies();
 
         if (!thisTurn.myTurn)
         {
@@ -69,11 +100,12 @@ public class PlayerActions : MonoBehaviour {
         }
 	}
 
+
     void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, 1f);
-        Gizmos.DrawWireSphere(transform.position, 8f);
+        Gizmos.DrawWireSphere(transform.position, 6f);
 
     }
 
