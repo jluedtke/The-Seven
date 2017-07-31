@@ -28,17 +28,18 @@ public class PlayerMovement : MonoBehaviour
     public SpriteChanger spriteChanger;
 
     private LayerMask finalMask = (1 << 10) | (1 << 11);
-
+    public PlayerActions pActions;
 
     void Start()
     {
         spriteChanger = GetComponentInChildren<SpriteChanger>();
+        pActions = GetComponent<PlayerActions>();
         counter = 0f;
     }
 
     public void Update()
     {
-        if (!GetComponent<Turn>().myTurn)
+        if (!GetComponent<Turn>().myTurn || !pActions.allEnemiesFound)
         {
             return;
         }
@@ -63,7 +64,6 @@ public class PlayerMovement : MonoBehaviour
                 coroutineDone = false;
                 if (counter < moveRange)
                 {
-                    print("BAMF");
                     StartCoroutine(Move(transform));
                 }
             }
