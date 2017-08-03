@@ -107,6 +107,8 @@ public class Turn : MonoBehaviour {
             }
             else
             {
+                GameObject panelStats = GameObject.Find("Interface/EnemyStats");
+                panelStats.SetActive(false);
                 Destroy(gameObject);
                 GameObject.Find("Player").GetComponent<Turn>().pActions.DefineEnemies();
             }

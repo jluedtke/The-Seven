@@ -76,14 +76,13 @@
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
-    <Reference Include="Mono.Cecil">
-      <HintPath>Library\UnityAssemblies\Mono.Cecil.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\NewGame.cs" />
+    <Compile Include="Assets\FloatingText.cs" />
+    <Compile Include="Assets\FloatingTextController.cs" />
     <Compile Include="Assets\Scripts\Abstract_Templates\GridMove.cs" />
     <Compile Include="Assets\Scripts\Classes\Heretic.cs" />
+    <Compile Include="Assets\Scripts\Enemy\DisplayUnitStats.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyActions.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyMovement.cs" />
     <Compile Include="Assets\Scripts\General\CharacterStats.cs" />
@@ -95,6 +94,7 @@
     <Compile Include="Assets\Scripts\General\Pathfinding.cs" />
     <Compile Include="Assets\Scripts\General\TurnManager.cs" />
     <Compile Include="Assets\Scripts\Menu\DisplayStats.cs" />
+    <Compile Include="Assets\Scripts\Menu\NewGame.cs" />
     <Compile Include="Assets\Scripts\Player\CameraMovement.cs" />
     <Compile Include="Assets\Scripts\Player\FromPlayerToEnemy.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerActions.cs" />

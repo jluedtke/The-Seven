@@ -7,12 +7,15 @@ public class FromPlayerToEnemy : MonoBehaviour {
     //private Color originalColor;
     private SpriteRenderer spriteColor;
     private PlayerActions playerAttacking;
+    private Stats pStats;
 
     private void Start()
     {
         spriteColor = GetComponentInChildren<SpriteRenderer>();
         //originalColor = spriteColor.material.color;
         playerAttacking = GameObject.Find("Player").GetComponent<PlayerActions>();
+        pStats = GameObject.Find("Player").GetComponent<Stats>();
+
     }
 
     void OnMouseEnter()
@@ -37,7 +40,6 @@ public class FromPlayerToEnemy : MonoBehaviour {
         {
             return;
         }
-
         playerAttacking.Attack(this.gameObject);
     }
 

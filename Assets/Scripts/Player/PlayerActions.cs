@@ -119,6 +119,7 @@ public class PlayerActions : MonoBehaviour {
 
         SpendPAction();
         enemy.GetComponent<Stats>().currentHP -= player.DMG;
+        FloatingTextController.CreateFloatingText(player.DMG.ToString(), enemy.transform, true);
         enemy.GetComponent<Turn>().CheckForDeath();
 
         for (int i = 0; i < enemies.Count; i++)
@@ -146,12 +147,17 @@ public class PlayerActions : MonoBehaviour {
             SpendPAction();
         }
         SpendMAction();
+        int damageToHeal = player.WISmod;
 
-        player.currentHP += player.WISmod;
-        if (player.currentHP >= player.maxHP)
+        if (player.currentHP + damageToHeal >= player.maxHP)
         {
+            FloatingTextController.CreateFloatingText((player.maxHP - player.currentHP).ToString(), transform, false);
             player.currentHP = player.maxHP;
             return;
+        } else
+        {
+            player.currentHP += damageToHeal;
+            FloatingTextController.CreateFloatingText(damageToHeal.ToString(), transform, false);
         }
     }
 

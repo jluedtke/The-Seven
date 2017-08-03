@@ -27,7 +27,7 @@ public class EnemyActions : MonoBehaviour {
         }
         SpendPAction();
         playerStats.currentHP -= GetComponent<Stats>().DMG;
-
+        FloatingTextController.CreateFloatingText(GetComponent<Stats>().DMG.ToString(), playerStats.transform, true);
         thisTurn.EndTurn();
     }
 
